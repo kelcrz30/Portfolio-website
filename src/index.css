@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Virgo Delight';
+  src: url('/Fonts/VirgoDelight.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Moderniz';
+  src: url('/Fonts/Moderniz.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Heavitas';
+  src: url('/Fonts/Heavitas') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Oswald';
+  src: url('/Oswald-VariableFont_wght') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Define the font utility in CSS for v4 */
+@theme {
+  --font-virgo: 'Virgo Delight', sans-serif;
+}
+@theme {
+  --font-heavitas: 'Heavitas', sans-serif;
+}
+@theme {
+  --font-Moderniz: 'Moderniz', sans-serif;
+}
+@theme {
+  --font-Oswald: 'Oswald', sans-serif;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 20s linear infinite;
+}
