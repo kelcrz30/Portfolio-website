@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ExternalLink, Github, Star, ArrowUpRight } from 'lucide-react';
+import { ExternalLink, Github, Star, ArrowUpRight, Projector } from 'lucide-react';
 
 const FeaturedWork = () => {
 
@@ -8,9 +8,8 @@ const FeaturedWork = () => {
     {
       id: 1,
       title: "Pinoys in profits",
-      subtitle: "Developed an intuitive habit tracker that enables users to effectively visualize their progress, facilitating seamless and engaging year-long habit tracking with advanced analytics and gamification.",
       desc: "Developed a comprehensive website for Pinoys in Profit, a Filipino forex trading community focused on education, support, and automated trading solutions. The platform serves as the digital hub for connecting traders and promoting their core offerings.",
-        image: "/temp1.png",
+        image: "/Portfolio-website/images/prof1.png",
       technologies: ["React", "Tailwind", "Javascript"],
       status: "Now Live",
       liveUrl: "#",
@@ -21,22 +20,20 @@ const FeaturedWork = () => {
     {
       id: 2,
       title: "CineLuxe",
-      subtitle: "Developed an intuitive habit tracker that enables users to effectively visualize their progress, facilitating seamless and engaging year-long habit tracking with advanced analytics and gamification.",
-      desc: "Developed a comprehensive website for Pinoys in Profit, a Filipino forex trading community focused on education, support, and automated trading solutions. The platform serves as the digital hub for connecting traders and promoting their core offerings.",
-      image: "/proj2.png",
+      desc: "CineLuxe is a movie browsing website I built as a personal project. It connects to the TMDB API to display detailed movie info and includes a simple search feature to help users find films quickly. Clicking on a movie brings up an interactive pop-up with an overview and a sample (placeholder) review. I also added a Favorite button so users can save movies they like. The goal was to create a smooth, engaging experience while practicing API integration and front-end interactivity.",
+      image: "/Portfolio-website/images/movieimg.png",
       technologies: ["React", "Tailwind", "Javascript"],
       status: "Now Live",
       liveUrl: "#",
-      bgGradient: "from-blue-500/20 to-purple-600/20",
+      bgGradient: "",
       accentColor: "border-green-400 text-green-400"
 
     },
     {
       id: 3,
       title: "CineLuxe",
-      subtitle: "Developed an intuitive habit tracker that enables users to effectively visualize their progress, facilitating seamless and engaging year-long habit tracking with advanced analytics and gamification.",
       desc: "Developed a comprehensive website for Pinoys in Profit, a Filipino forex trading community focused on education, support, and automated trading solutions. The platform serves as the digital hub for connecting traders and promoting their core offerings.",
-      image: "/proj3.png",
+      image: "/Portfolio-website/images/proj3.png",
       technologies: ["React", "Tailwind", "Javascript"],
       status: "Now Live",
       liveUrl: "#",
@@ -73,9 +70,12 @@ const FeaturedWork = () => {
                   <h3 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-none">
                     {project.title}
                   </h3>
-                    <p className="text-xl md:text-2xl text-gray-300 leading-relaxed">
-                      {project.subtitle}
-                    </p>
+                    </div>
+                    <div className='space-y-6'>
+                      <p className='text-gray-400 leading-relaxed text-lg'>
+                        {project.desc}
+                      </p>
+                    </div>
                     <div className="space-y-3">
                       <div className="text-sm font-semibold text-gray-500 uppercase tracking-wide">
                         technology Stack
@@ -94,7 +94,7 @@ const FeaturedWork = () => {
                       <div className="w-2 h-2 bg-current rounded-full animate-pulse"></div>
                       <span className="text-sm font-medium">{project.status}</span>
                     </div>
-                 </div>
+            
                  <div className='flex gap-4 pt-4'>
                   <a href={project.liveUrl}
                    className="group flex items-center gap-3 px-8 py-4 bg-white text-black font-bold rounded-full hover:bg-gray-200 transition-all duration-300 transform hover:scale-105"
@@ -129,7 +129,7 @@ const FeaturedWork = () => {
                     </div>
                      <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
                 </div>
-                                  <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-white/10 to-white/5 rounded-full blur-xl"></div>
+                   <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-white/10 to-white/5 rounded-full blur-xl"></div>
                   <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-gradient-to-br from-white/5 to-transparent rounded-full blur-2xl"></div>
                 </div>
               </div>

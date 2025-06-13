@@ -1,6 +1,6 @@
 function Hero() {
     return (
-        <section className="px-3 md:px-14 py-24  mb-15">
+        <section className="px-3 md:px-14 py-30  mb-17">
             <div className="w-full h-full flex items-center">
                <div className="w-full">
                     {/* Left side - Main content */}
@@ -8,7 +8,7 @@ function Hero() {
                         <div className="flex flex-col ">
                             <p></p>
                          <h1 className="text-5xl md:text-7xl xl:text-9xl font-Moderniz text-white leading-none mb-2">
-                           FR<span className="animate-spin inline-block text-10xl">O</span>NTEND <br className="hidden lg:block" /> DEVEL<span className=" inline-block text-10xl">O</span>PER
+                           FRONTEND <br className="hidden lg:block" /> DEVEL<span className=" inline-block text-10xl">O</span>PER
                          </h1>
 
                         <p className="text-gray-300  mb-8 lg:mb-12  text-base lg:text-lg   leading-relaxed lg:mx-0">

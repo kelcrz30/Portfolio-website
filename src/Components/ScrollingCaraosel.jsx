@@ -11,9 +11,9 @@ const ScrollingCarousel = () => {
                 <span key={i} 
                 className='mx-12 flex font-Moderniz items-center  text-4xl'>
                     Available for hire
-                      <img src="/decoStar.png" 
+                      <img src="/Portfolio-website/images/decoStar.png" 
                       alt="Star" 
-                      className=' ml-22 h-16 w-16 animate-spin inline-block '
+                      className=' ml-22 h-14 w-14 animate-spin inline-block  '
                       />
                 </span>
             ))}
