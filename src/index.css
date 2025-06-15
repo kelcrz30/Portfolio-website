@@ -28,19 +28,54 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: 'ButlerBlack';
+  src: url('/Fonts/Butler_Black.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Universal';
+  src: url('/Fonts/Universal Serif.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Extenda';
+  src: url('/Fonts/Extenda-80-Peta-trial.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'aileron';
+  src: url('/Fonts/aileron.bold.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
-/* Define the font utility in CSS for v4 */
+/* Define font families for v4 */
 @theme {
   --font-virgo: 'Virgo Delight', sans-serif;
-}
-@theme {
   --font-heavitas: 'Heavitas', sans-serif;
-}
-@theme {
   --font-Moderniz: 'Moderniz', sans-serif;
-}
-@theme {
   --font-Oswald: 'Oswald', sans-serif;
+  --font-ButlerBlack: 'ButlerBlack', sans-serif;
+  --font-Universal: 'Universal', sans-serif;
+  --font-Extenda: 'Extenda', sans-serif;
+  --font-aileron: 'aileron', sans-serif;
+}
+
+/* Define custom font sizes for v4 */
+@theme {
+  --font-size-hero: clamp(4rem, 12vw, 20rem);
+  --font-size-mega: clamp(6rem, 15vw, 25rem);
+  --font-size-giant: 12rem;
+  --font-size-massive: 16rem;
+  --font-size-ultra: clamp(8rem, 20vw, 30rem);
 }
 
 @keyframes scroll {

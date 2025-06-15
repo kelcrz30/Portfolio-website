@@ -5,7 +5,7 @@ const ScrollingCarousel = () => {
 
 
   return (
-    <div className="w-full bg-white py-8 mt-1 md:mt-6">
+    <div className="w-full bg-orange-400 py-8 mt-1 md:mt-6">
         <Marquee speed={60} gradient={false} gradientColor='white'>
             {[...Array(10)].map((_, i) => (
                 <span key={i} 
