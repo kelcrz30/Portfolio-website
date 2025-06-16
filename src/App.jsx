@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import CustomCursor from "./Components/Cursor";
 import FeaturedWork from "./Components/FeaturedProjects";
 import Header from "./Components/Header";
@@ -9,6 +10,57 @@ import Skills from "./Components/Skills";
 import About from "./Components/AboutPage";
 
 function App() {
+useEffect(() => {
+  let scrollY = 0;
+  let currentY = 0;
+  let animationId = null;
+
+  const speed = 0.04;
+
+  const updateScroll = () => {
+    currentY += (scrollY - currentY) * speed;
+    
+    // Use CSS Custom Property instead of transform to avoid conflicts
+    document.documentElement.style.setProperty('--scroll-y', `${currentY}px`);
+    
+    // Still update actual scroll for other components that need it
+    window.scrollTo(0, currentY);
+    
+    if (Math.abs(scrollY - currentY) > 0.1) {
+      animationId = requestAnimationFrame(updateScroll);
+    } else {
+      animationId = null;
+    }
+  };
+
+  const handleWheel = (e) => {
+    e.preventDefault();
+    
+    const delta = e.deltaY * 0.8;
+    scrollY += delta;
+    
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    scrollY = Math.max(0, Math.min(scrollY, maxScroll));
+    
+    if (!animationId) {
+      animationId = requestAnimationFrame(updateScroll);
+    }
+  };
+
+  // Add CSS to prevent conflicts
+  document.documentElement.style.scrollBehavior = 'auto';
+  document.body.style.willChange = 'auto';
+
+  window.addEventListener('wheel', handleWheel, { passive: false });
+
+  return () => {
+    window.removeEventListener('wheel', handleWheel);
+    document.documentElement.style.removeProperty('--scroll-y');
+    if (animationId) {
+      cancelAnimationFrame(animationId);
+    }
+  };
+}, []);
   return (
     <div className="bg-black min-h-screen relative">
       {/* Global Background Lines for All Pages - Responsive */}
@@ -26,7 +78,7 @@ function App() {
             style={{ left: '66.66%' }}
           />
         </div>
-                  
+                       
         {/* Desktop: 2 lines centered */}
         <div className="hidden md:block">
           {/* Line 1: 33.33% from left */}
@@ -41,7 +93,7 @@ function App() {
           />
         </div>
       </div>
-
+       
       {/* All Components with relative positioning to stay above lines */}
       <div className="relative z-10">
         <CustomCursor/>
