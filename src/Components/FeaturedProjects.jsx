@@ -36,27 +36,40 @@ const FeaturedWork = () => {
       bgGradient: "",
       accentColor: "border-green-400 text-green-400"
     },
+    {
+      id: 4,
+      title: "CineLuxe",
+      image: "/Portfolio-website/images/proj3.png",
+      technologies: ["React", "Tailwind", "Javascript"],
+      status: "Now Live",
+      liveUrl: "#",
+      bgGradient: "",
+      accentColor: "border-green-400 text-green-400"
+    },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
       const newScrollProgress = {};
       const windowHeight = window.innerHeight;
+      const isMobile = window.innerWidth < 1024; // lg breakpoint
       
       projectRefs.current.forEach((ref, index) => {
         if (ref) {
           const rect = ref.getBoundingClientRect();
           const elementTop = rect.top;
           
-          const startTrigger = windowHeight; 
-          const endTrigger = windowHeight * 0.10; 
+          // Different triggers for mobile vs desktop
+          const startTrigger = isMobile ? windowHeight * 0.8 : windowHeight;
+          const endTrigger = isMobile ? windowHeight * 0.2 : windowHeight * 0.10;
           
           let progress = 0;
           
           if (elementTop <= startTrigger && elementTop >= endTrigger) {
             progress = (startTrigger - elementTop) / (startTrigger - endTrigger);
             progress = Math.min(Math.max(progress, 0), 1);
-            progress = progress * progress * (3 - 2 * progress);
+            // Faster easing for mobile
+            progress = isMobile ? progress * progress : progress * progress * (3 - 2 * progress);
           } else if (elementTop < endTrigger) {
             progress = 1;
           }
@@ -93,7 +106,7 @@ const FeaturedWork = () => {
     <section className="text-white py-12 lg:py-20">
       <div className="mx-auto px-0 lg:px-10">
 
-        <div className="text-center py-8 lg:py-20 px-4 lg:px-0">
+        <div className="text-center py-10 lg:py-20 px-4 lg:px-0">
           <h2 className="text-4xl md:text-5xl lg:text-8xl font-Moderniz uppercase tracking-tighter mb-4 lg:mb-6">
             Featured Work
           </h2>
@@ -122,14 +135,10 @@ const FeaturedWork = () => {
                   {/* Left Column - Details (Mobile) */}
                   <div className="w-5/12 space-y-3 text-lg pl-4 md:pl-8 pr-2">
                     <div>
-                      <h3 className="text-lg md:text-2xl text-white font-Moderniz mt-4 font-black tracking-tight leading-tight">
+                      <h3 className="text-sm text-md md:text-2xl text-white font-Moderniz mt-4 font-black tracking-tight leading-tight">
                         {project.title}
                       </h3>
                     </div>
-                    
-                    <p className='text-gray-400 leading-relaxed text-xs md:text-sm'>
-                      {project.desc}
-                    </p>
                     
                     <div className="space-y-2">
                       <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
@@ -161,17 +170,20 @@ const FeaturedWork = () => {
                   </div>
 
                   {/* Right Column - Image (Mobile) - Full width to edge */}  
-                  <div className="md:w-4/5 ">
+                  <div className="w-4/5 ">
                     <div className="relative h-full">
                       <div className={`absolute inset-0 bg-gradient-to-br ${project.bgGradient} z-10`}></div>
                       <div className="overflow-hidden h-full">
                         <img
                           src={project.image}
                           alt={project.title}
-                          className="w-full h-full object-cover transition-transform duration-100 ease-out group-hover:scale-110"
+                          loading="lazy"
+                          
+                          className="w-full h-full object-cover  "
                           style={{
-                            transform: `scale(${0.3 + (scrollProgress[project.id] || 0) * 0.7}) translateY(${50 - (scrollProgress[project.id] || 0) * 50}px)`,
-                            opacity: 0.1 + (scrollProgress[project.id] || 0) * 0.9,
+                            // Faster animation values for mobile
+                            transform: `scale(${0.5 + (scrollProgress[project.id] || 0) * 0.5}) translateY(${30 - (scrollProgress[project.id] || 0) * 30}px)`,
+                            opacity: 0.3 + (scrollProgress[project.id] || 0) * 0.7,
                             transition: 'none'
                           }}
                         />
@@ -188,14 +200,14 @@ const FeaturedWork = () => {
                         className="absolute -top-1 -right-1 w-8 h-8 bg-gradient-to-br from-white/10 to-white/5 rounded-full blur-xl"
                         style={{
                           opacity: (scrollProgress[project.id] || 0) * 0.8,
-                          transform: `scale(${0.2 + (scrollProgress[project.id] || 0) * 0.8})`,
+                          transform: `scale(${0.4 + (scrollProgress[project.id] || 0) * 0.6})`,
                         }}
                       ></div>
                       <div 
                         className="absolute -bottom-2 -left-2 w-12 h-12 bg-gradient-to-br from-white/5 to-transparent rounded-full blur-2xl"
                         style={{
                           opacity: (scrollProgress[project.id] || 0) * 0.6,
-                          transform: `scale(${0.1 + (scrollProgress[project.id] || 0) * 0.9})`,
+                          transform: `scale(${0.3 + (scrollProgress[project.id] || 0) * 0.7})`,
                         }}
                       ></div>
                     </div>
@@ -210,7 +222,7 @@ const FeaturedWork = () => {
                 {/* Left Column - Title */}
                 <div className="">
                   <div className="">
-                    <h3 className="text-4xl md:text-5xl text-white font-Moderniz lg:text-6xl font-black tracking-tight leading-none">
+                    <h3 className="text-4xl md:text-5xl text-white font-Moderniz lg:text-4xl xl:text-6xl font-black tracking-tight leading-none">
                       {project.title}
                     </h3>
                     <div className='flex gap-4 pt-4'>
@@ -232,21 +244,24 @@ const FeaturedWork = () => {
                       <img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover transition-transform duration-100 ease-out group-hover:scale-110"
+                        className="w-full h-full object-cover transition-transform duration-100 ease-out "
                         style={{
                           transform: `scale(${0.3 + (scrollProgress[project.id] || 0) * 0.7}) translateY(${50 - (scrollProgress[project.id] || 0) * 50}px)`,
                           opacity: 0.1 + (scrollProgress[project.id] || 0) * 0.9,
                           transition: 'none'
                         }}
                       />
+                      
                     </div>
                     <div className="absolute bottom-6 right-6 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <div className="bg-white/10 backdrop-blur-md p-3 rounded-full border border-white/20 hover:bg-white/20 transition-colors duration-300 cursor-pointer">
                         <ArrowUpRight className="w-5 h-5 text-white" />
                       </div>
                     </div>
+       
                     <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
                   </div>
+                  
                   
                   {/* Decorative elements */}
                   <div 
@@ -256,6 +271,7 @@ const FeaturedWork = () => {
                       transform: `scale(${0.2 + (scrollProgress[project.id] || 0) * 0.8})`,
                     }}
                   ></div>
+                  
                   <div 
                     className="absolute -bottom-8 -left-8 w-32 h-32 bg-gradient-to-br from-white/5 to-transparent rounded-full blur-2xl"
                     style={{
@@ -263,10 +279,11 @@ const FeaturedWork = () => {
                       transform: `scale(${0.1 + (scrollProgress[project.id] || 0) * 0.9})`,
                     }}
                   ></div>
+                  
                 </div>
 
                 {/* Right Column - Details (Desktop) */}
-                <div className="">
+                <div className="flex text-right justify-end">
                   <div 
                     className="space-y-6"
                     style={{
@@ -288,22 +305,29 @@ const FeaturedWork = () => {
                           >
                             {tech}
                           </span>
+                          
                         ))}
                       </div>
+                      
                     </div>
 
                     <div className={`inline-flex items-center gap-2 px-4 py-2 ${project.bgGradient} border ${project.accentColor} rounded-full`}>
                       <div className="w-2 h-2 bg-current rounded-full animate-pulse"></div>
                       <span className="text-sm font-medium">{project.status}</span>
                     </div>
+                    
                   </div>
+              
                 </div>
 
               </div>
 
             </div>
+            
           ))}
+                        <div className='w-screen h-px  bg-white/8 -mx-4 md:-mx-8 lg:-mx-10'/>
         </div>
+       
       </div>
     </section>
   );

@@ -2,19 +2,14 @@ import React from 'react';
 import Marquee from 'react-fast-marquee';
 
 const ScrollingCarousel = () => {
-
-
-  return (
-    <div className="w-full bg-orange-400 py-8 mt-1 md:mt-6">
+    return (
+    <div className="w-screen bg-neutral-900 py-8 mt-1 md:mt-6 overflow-hidden">
         <Marquee speed={60} gradient={false} gradientColor='white'>
             {[...Array(10)].map((_, i) => (
-                <span key={i} 
-                className='mx-12 flex font-Moderniz items-center  text-4xl'>
-                    Available for hire
-                      <img src="/Portfolio-website/images/decoStar.png" 
-                      alt="Star" 
-                      className=' ml-22 h-14 w-14 animate-spin inline-block  '
-                      />
+                <span key={i}
+                 className='mx-12 text-white flex font-Moderniz items-center  text-4xl'>
+                    Available for hire 
+                    <div className='animate-spin inline-block ml-24'>✦</div>
                 </span>
             ))}
         </Marquee>

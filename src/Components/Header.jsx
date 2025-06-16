@@ -6,7 +6,7 @@ function Header() {
   
   return (
     <>
-      <header className=" text-white py-10 px-14  z-50">
+      <header className=" text-white py-10 px-4  z-50">
         <div className="flex items-center justify-between">
           <h2 className="font-Moderniz text-orange-400">Kel Dev.</h2>
           
