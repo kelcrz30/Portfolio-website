@@ -6,7 +6,7 @@ function Header() {
   
   return (
     <>
-      <header className=" text-white py-10 px-4  z-50">
+      <header className=" text-black py-10 px-4  z-50">
         <div className="flex items-center justify-between">
           <h2 className="font-Moderniz text-orange-400">Kel Dev.</h2>
           
@@ -23,17 +23,17 @@ function Header() {
           >
             <div className="flex flex-col space-y-2">
               <span
-                className={`w-8 h-0.5 bg-white transition-all duration-300 ${
+                className={`w-8 h-0.5 bg-black transition-all duration-300 ${
                   isOpen ? `rotate-45 translate-y-2.5` : ''
                 }`}
               />
               <span
-                className={`w-8 h-0.5 bg-white transition-all duration-300 ${
+                className={`w-8 h-0.5 bg-black transition-all duration-300 ${
                   isOpen ? 'opacity-0' : ''
                 }`}
               />
               <span
-                className={`w-8 h-0.5 bg-white transition-all duration-300 ${
+                className={`w-8 h-0.5 bg-black transition-all duration-300 ${
                   isOpen ? '-rotate-45 -translate-y-2.5' : ''
                 }`}
               />
@@ -55,7 +55,7 @@ function Header() {
           x
         </button>
 
-        <div className="absolute top-6 left-14 text-white text-xl font-medium">
+        <div className="absolute top-6 left-14 text-black text-xl font-medium">
           Portfolio
         </div>
 

@@ -8,6 +8,7 @@ const FeaturedWork = () => {
   const projects = [
     {
       id: 1,
+      projNumber: "[01]",
       title: "Pinoys in profits",
       image: "/Portfolio-website/images/pinoysinprofit.png",
       technologies: ["React", "Tailwind", "Javascript"],
@@ -18,6 +19,7 @@ const FeaturedWork = () => {
     },
     {
       id: 2,
+       projNumber: "[02]",
       title: "CineLuxe",
       image: "/Portfolio-website/images/cineluxe.png",
       technologies: ["React", "Tailwind", "Javascript"],
@@ -28,6 +30,7 @@ const FeaturedWork = () => {
     },
     {
       id: 3,
+       projNumber: "[03]",
       title: "CineLuxe",
       image: "/Portfolio-website/images/proj3.png",
       technologies: ["React", "Tailwind", "Javascript"],
@@ -38,6 +41,7 @@ const FeaturedWork = () => {
     },
     {
       id: 4,
+       projNumber: "[04]",
       title: "CineLuxe",
       image: "/Portfolio-website/images/proj3.png",
       technologies: ["React", "Tailwind", "Javascript"],
@@ -103,11 +107,11 @@ const FeaturedWork = () => {
   }, []);
 
   return (
-    <section className="text-white py-12 lg:py-20">
+    <section className="text-black py-12 lg:py-20">
       <div className="mx-auto px-0 lg:px-10">
 
         <div className="text-center py-10 lg:py-20 px-4 lg:px-0">
-          <h2 className="text-4xl md:text-5xl lg:text-8xl font-Moderniz uppercase tracking-tighter mb-4 lg:mb-6">
+          <h2 className="text-4xl text-black md:text-5xl lg:text-8xl font-Moderniz uppercase tracking-tighter mb-4 lg:mb-6">
             Featured Work
           </h2>
           <p className="text-gray-400 text-base lg:text-xl max-w-3xl mx-auto leading-relaxed">
@@ -117,7 +121,7 @@ const FeaturedWork = () => {
         </div>
 
         <div className=''>
-          <div className='w-screen h-px bg-white/8 -mx-0 lg:-mx-10'></div>
+          <div className='w-screen h-px bg-black/10 -mx-0 lg:-mx-10'></div>
           {projects.map((project, index) => (
             <div 
               key={project.id} 
@@ -126,7 +130,7 @@ const FeaturedWork = () => {
               data-project-id={project.id}
             >
               
-              {index > 0 && <div className='w-screen h-px bg-white/8 -mx-4 md:-mx-8 lg:-mx-10'></div>}
+              {index > 0 && <div className='w-screen h-px bg-black/10 -mx-4 md:-mx-8 lg:-mx-10'></div>}
               
               {/* Mobile Layout */}
               <div className="lg:hidden">
@@ -134,8 +138,13 @@ const FeaturedWork = () => {
                   
                   {/* Left Column - Details (Mobile) */}
                   <div className="w-5/12 space-y-3 text-lg pl-4 md:pl-8 pr-2">
+                  <div className='mt-4'>
+                    <h3 className='font-extrabold text-black/50'>
+                      {project.projNumber}
+                    </h3>
+                  </div>
                     <div>
-                      <h3 className="text-sm text-md md:text-2xl text-white font-Moderniz mt-4 font-black tracking-tight leading-tight">
+                      <h3 className="text-sm text-md md:text-2xl text-black font-Moderniz mt-4 font-black tracking-tight leading-tight">
                         {project.title}
                       </h3>
                     </div>
@@ -147,7 +156,7 @@ const FeaturedWork = () => {
                       <div className="flex flex-wrap gap-1">
                         {project.technologies.map((tech, techindex) => (
                           <span key={techindex}
-                            className="px-2 py-1 bg-gray-800 rounded-full text-xs font-medium border border-gray-700"
+                            className="px-2 py-1 text-black bg-black-800 rounded-full text-sm font-medium border border-gray-700 hover:border-gray-500 transition-colors duration-300"
                           >
                             {tech}
                           </span>
@@ -161,16 +170,16 @@ const FeaturedWork = () => {
                     </div>
 
                     <div className='flex flex-col gap-2 pt-1 max-w-16'>
-                      <a href={project.liveUrl}
-                        className="group flex items-center justify-center gap-1 p-4 bg-white text-black font-bold rounded-full hover:bg-gray-200 transition-all duration-300 text-xs"
+                     <a 
+                        href={project.liveUrl}
+                        className="group inline-flex items-center justify-center px-4 py-2 bg-black text-white rounded-lg hover:bg-white hover:text-black border-2 border-black transition-all duration-300 hover:shadow-lg"
                       >
-                        <ArrowUpRight className="w-7 h-7 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                        <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
                       </a>
                     </div>
                   </div>
 
-                  {/* Right Column - Image (Mobile) - Full width to edge */}  
-                  <div className="w-4/5 ">
+                  <div className="w-5/6 ">
                     <div className="relative h-full">
                       <div className={`absolute inset-0 bg-gradient-to-br ${project.bgGradient} z-10`}></div>
                       <div className="overflow-hidden h-full">
@@ -181,9 +190,8 @@ const FeaturedWork = () => {
                           
                           className="w-full h-full object-cover  "
                           style={{
-                            // Faster animation values for mobile
                             transform: `scale(${0.5 + (scrollProgress[project.id] || 0) * 0.5}) translateY(${30 - (scrollProgress[project.id] || 0) * 30}px)`,
-                            opacity: 0.3 + (scrollProgress[project.id] || 0) * 0.7,
+                            opacity: 0.7 + (scrollProgress[project.id] || 0) * 0.7,
                             transition: 'none'
                           }}
                         />
@@ -221,13 +229,19 @@ const FeaturedWork = () => {
                 
                 {/* Left Column - Title */}
                 <div className="">
+                            <div className='mb-4 text-3xl'>
+                    <h3 className='font-extrabold text-black/50'>
+                      {project.projNumber}
+                    </h3>
+                  </div>
+
                   <div className="">
-                    <h3 className="text-4xl md:text-5xl text-white font-Moderniz lg:text-4xl xl:text-6xl font-black tracking-tight leading-none">
+                    <h3 className="text-4xl md:text-5xl text-black font-Moderniz lg:text-4xl xl:text-6xl font-black tracking-tight leading-none">
                       {project.title}
                     </h3>
                     <div className='flex gap-4 pt-4'>
                       <a href={project.liveUrl}
-                        className="group flex items-center gap-3 px-8 py-4 bg-white text-black font-bold rounded-full hover:bg-gray-200 transition-all duration-300 transform hover:scale-105"
+                        className="group flex items-center gap-3 px-8 py-4 bg-black text-white font-bold rounded-full hover:bg-black-200 transition-all duration-300 transform hover:scale-105"
                       >
                         <span>View Project</span>
                         <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
@@ -238,7 +252,7 @@ const FeaturedWork = () => {
 
                 {/* Center Column - Image */}
                 <div className="relative">
-                  <div className="relative overflow-hidden shadow-2xl group">
+                  <div className="relative overflow-hidden group">
                     <div className={`absolute inset-0 bg-gradient-to-br ${project.bgGradient} z-10`}></div>
                     <div className="overflow-hidden">
                       <img
@@ -291,9 +305,6 @@ const FeaturedWork = () => {
                       transform: `translateX(${30 - (scrollProgress[project.id] || 0) * 30}px)`,
                     }}
                   >
-                    <p className='text-gray-400 leading-relaxed text-lg'>
-                      {project.desc}
-                    </p>
                     <div className="space-y-3">
                       <div className="text-sm font-semibold text-gray-500 uppercase tracking-wide">
                         technology Stack
@@ -301,7 +312,7 @@ const FeaturedWork = () => {
                       <div className="flex flex-wrap gap-3">
                         {project.technologies.map((tech, techindex) => (
                           <span key={techindex}
-                            className="px-4 py-2 bg-gray-800 rounded-full text-sm font-medium border border-gray-700 hover:border-gray-500 transition-colors duration-300"
+                            className="px-4 py-2 text-white bg-gray-800 rounded-full text-sm font-medium border border-gray-700 hover:border-gray-500 transition-colors duration-300"
                           >
                             {tech}
                           </span>
@@ -325,7 +336,7 @@ const FeaturedWork = () => {
             </div>
             
           ))}
-                        <div className='w-screen h-px  bg-white/8 -mx-4 md:-mx-8 lg:-mx-10'/>
+                        <div className='w-screen h-px  bg-black/30 -mx-4 md:-mx-8 lg:-mx-10'/>
         </div>
        
       </div>

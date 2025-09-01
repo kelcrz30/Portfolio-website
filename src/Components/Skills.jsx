@@ -87,14 +87,14 @@ function Skills() {
     };
 
     return ( 
-        <div className=" text-white relative overflow-hidden min-h-screen">
+        <div className=" text-black relative overflow-hidden ">
           
             <div className="relative z-10">
                 <section ref={sectionRef} className="py-20 flex items-center justify-center px-6">
                     <div className="max-w-7xl mx-auto w-full">
                         <div className="grid lg:grid-cols-2 gap-20 items-center">
                             <div>
-                                <h2 className="text-5xl md:text-8xl font-Moderniz text-orange-400">
+                                <h2 className="text-5xl md:text-8xl font-Moderniz text-black-400">
                                     {isVisible ? (
                                         <span>
                                             {renderTypedTitle()}
@@ -109,7 +109,7 @@ function Skills() {
                                     )}
                                 </h2>
                                 <div className="mt-8 max-w-md">
-                                    <p className="text-gray-400 text-lg leading-relaxed transform translate-y-0 
+                                    <p className="text-gray-600 text-lg leading-relaxed transform translate-y-0 
                                      transition-transform duration-1000 delay-400">
                                         Building digital experiences with precision, performance, and modern web technologies.
                                     </p>
@@ -129,7 +129,7 @@ function Skills() {
                                                 <h3 className="text-2xl font-bold tracking-wide">
                                                     {skill.category}
                                                 </h3>
-                                                <div className={`h-px bg-white transition-all duration-500 ${
+                                                <div className={`h-px bg-black transition-all duration-500 ${
                                                     activeIndex === index ? 'w-24' : 'w-12'
                                                 }`}>
                                                 </div>
@@ -141,7 +141,7 @@ function Skills() {
                                                         key={techIndex}
                                                         className={`px-4 py-2 text-sm font-semibold border border-gray-700 rounded-full transition-all duration-500 ${
                                                             activeIndex === index 
-                                                            ? "bg-white text-black"
+                                                            ? "bg-black text-white"
                                                             : "hover:border-gray-400"
                                                         }`}
                                                         style={{transitionDelay: activeIndex === index ? `${techIndex * 100}ms` : '0ms'}}
@@ -151,8 +151,8 @@ function Skills() {
                                                 ))}
                                             </div>
                                             
-                                            <p className={`transition-all duration-500 text-gray-300 ${
-                                                activeIndex === index ? "text-gray-100" : ""
+                                            <p className={`transition-all duration-500 text-gray-500 ${
+                                                activeIndex === index ? "text-gray-600" : ""
                                             }`}>
                                                 {skill.description}
                                             </p>
