@@ -57,7 +57,7 @@
   font-display: swap;
 }
 
-/* Define font families for v4 */
+
 @theme {
   --font-virgo: 'Virgo Delight', sans-serif;
   --font-heavitas: 'Heavitas', sans-serif;
@@ -69,7 +69,6 @@
   --font-aileron: 'aileron', sans-serif;
 }
 
-/* Define custom font sizes for v4 */
 @theme {
   --font-size-hero: clamp(4rem, 12vw, 20rem);
   --font-size-mega: clamp(6rem, 15vw, 25rem);

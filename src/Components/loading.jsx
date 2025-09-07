@@ -47,7 +47,7 @@ if (isCompleted) {
               />
              </div>
              <div className="text-gray-500 text-xs">
-          {Math.round(progress)}%
+          {Math.round(progress)}
         </div>
           </div>
         </div>

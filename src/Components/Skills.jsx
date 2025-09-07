@@ -135,7 +135,7 @@ function Skills() {
                                                 </div>
                                             </div>
                                             
-                                            <div className="flex flex-wrap gap-3 mb-3">
+                                            <div className="flex flex-wrap gap-3">
                                                 {skill.tech.map((tech, techIndex) => (
                                                     <span
                                                         key={techIndex}

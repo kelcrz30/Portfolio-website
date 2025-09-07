@@ -1,4 +1,4 @@
-// CustomCursor.jsx
+
 import { useState, useEffect } from 'react';
 
 const CustomCursor = () => {
@@ -48,7 +48,6 @@ const CustomCursor = () => {
 
   return (
     <>
-      {/* Main cursor */}
       <div
         className={`fixed w-10 h-10 bg-gray-50 rounded-full pointer-events-none z-[9999] transition-transform duration-100 ease-out mix-blend-difference ${
           isHovering ? 'scale-150 bg-red-400' : ''
@@ -59,7 +58,6 @@ const CustomCursor = () => {
         }}
       />
       
-      {/* Follower circle */}
       <div
         className={`fixed w-15 h-15 border-2 border-white rounded-full pointer-events-none z-[9998] transition-all duration-300 ease-out opacity-50 ${
           isHovering ? 'scale-150 border-red-400' : ''

@@ -13,7 +13,7 @@ const FeaturedWork = () => {
       image: "/Portfolio-website/images/pinoysinprofit.png",
       technologies: ["React", "Tailwind", "Javascript"],
       status: "Now Live",
-      liveUrl: "#",
+      liveUrl: "https://pinoysinprofit.com/",
       bgGradient: "",
       accentColor: "border-green-400 text-green-400"
     },
@@ -24,46 +24,46 @@ const FeaturedWork = () => {
       image: "/Portfolio-website/images/cineluxe.png",
       technologies: ["React", "Tailwind", "Javascript"],
       status: "Now Live",
-      liveUrl: "#",
+      liveUrl: "https://kelcrz30.github.io/Movie-Website/",
       bgGradient: "",
       accentColor: "border-green-400 text-green-400"
     },
     {
       id: 3,
        projNumber: "[03]",
-      title: "CineLuxe",
-      image: "/Portfolio-website/images/proj3.png",
-      technologies: ["React", "Tailwind", "Javascript"],
-      status: "Now Live",
+      title: "E-COMMERCE",
+      image: "/Portfolio-website/images/proj4.png",
+      technologies: ["None"],
+      status: "In development",
       liveUrl: "#",
       bgGradient: "",
-      accentColor: "border-green-400 text-green-400"
+      accentColor: "border-red-400 text-red-400"
     },
     {
       id: 4,
        projNumber: "[04]",
-      title: "CineLuxe",
-      image: "/Portfolio-website/images/proj3.png",
-      technologies: ["React", "Tailwind", "Javascript"],
-      status: "Now Live",
+      title: "PHOTOBOOTH",
+      image: "/Portfolio-website/images/proj5.png",
+      technologies: ["None"],
+      status: "In development",
       liveUrl: "#",
       bgGradient: "",
-      accentColor: "border-green-400 text-green-400"
+      accentColor: "border-red-400 text-red-400"
     },
+ 
   ];
 
   useEffect(() => {
     const handleScroll = () => {
       const newScrollProgress = {};
       const windowHeight = window.innerHeight;
-      const isMobile = window.innerWidth < 1024; // lg breakpoint
+      const isMobile = window.innerWidth < 1024; 
       
       projectRefs.current.forEach((ref, index) => {
         if (ref) {
           const rect = ref.getBoundingClientRect();
           const elementTop = rect.top;
           
-          // Different triggers for mobile vs desktop
           const startTrigger = isMobile ? windowHeight * 0.8 : windowHeight;
           const endTrigger = isMobile ? windowHeight * 0.2 : windowHeight * 0.10;
           
@@ -72,7 +72,6 @@ const FeaturedWork = () => {
           if (elementTop <= startTrigger && elementTop >= endTrigger) {
             progress = (startTrigger - elementTop) / (startTrigger - endTrigger);
             progress = Math.min(Math.max(progress, 0), 1);
-            // Faster easing for mobile
             progress = isMobile ? progress * progress : progress * progress * (3 - 2 * progress);
           } else if (elementTop < endTrigger) {
             progress = 1;
@@ -107,7 +106,7 @@ const FeaturedWork = () => {
   }, []);
 
   return (
-    <section className="text-black py-12 lg:py-20">
+    <section className="text-black pb-0 m-0">
       <div className="mx-auto px-0 lg:px-10">
 
         <div className="text-center py-10 lg:py-20 px-4 lg:px-0">
@@ -136,7 +135,6 @@ const FeaturedWork = () => {
               <div className="lg:hidden">
                 <div className="flex min-h-0">
                   
-                  {/* Left Column - Details (Mobile) */}
                   <div className="w-5/12 space-y-3 text-lg pl-4 md:pl-8 pr-2">
                   <div className='mt-4'>
                     <h3 className='font-extrabold text-black/50'>
@@ -224,10 +222,7 @@ const FeaturedWork = () => {
                 </div>
               </div>
 
-              {/* Desktop Layout */}
               <div className="hidden lg:grid grid-cols-3 gap-10 items-center">
-                
-                {/* Left Column - Title */}
                 <div className="">
                             <div className='mb-4 text-3xl'>
                     <h3 className='font-extrabold text-black/50'>
@@ -250,7 +245,6 @@ const FeaturedWork = () => {
                   </div>
                 </div>
 
-                {/* Center Column - Image */}
                 <div className="relative">
                   <div className="relative overflow-hidden group">
                     <div className={`absolute inset-0 bg-gradient-to-br ${project.bgGradient} z-10`}></div>
@@ -276,8 +270,6 @@ const FeaturedWork = () => {
                     <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
                   </div>
                   
-                  
-                  {/* Decorative elements */}
                   <div 
                     className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-white/10 to-white/5 rounded-full blur-xl"
                     style={{
@@ -296,7 +288,6 @@ const FeaturedWork = () => {
                   
                 </div>
 
-                {/* Right Column - Details (Desktop) */}
                 <div className="flex text-right justify-end">
                   <div 
                     className="space-y-6"
@@ -336,7 +327,7 @@ const FeaturedWork = () => {
             </div>
             
           ))}
-                        <div className='w-screen h-px  bg-black/30 -mx-4 md:-mx-8 lg:-mx-10'/>
+        <div className='w-screen h-px bg-black/30 -mx-4 md:-mx-8 lg:-mx-10'/>
         </div>
        
       </div>
