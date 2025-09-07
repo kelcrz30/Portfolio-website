@@ -98,7 +98,6 @@ const AboutSkillsSection = () => {
               <div className="space-y-8">
                 {[
                   { number: '5', label: 'PROJECTS', delay: '0s' },
-                  { number: '2', label: 'YEAR CRAFTING', delay: '0.2s' },
                   { number: '∞', label: 'CREATIVE SOLUTIONS', delay: '0.4s' }
                 ].map((stat, index) => (
                   <div key={index} 
@@ -120,8 +119,6 @@ const AboutSkillsSection = () => {
             </div>
           </div>
         </div>
-
-        {/* Experience Timeline */}
    
 
         {/* Skills Showcase */}
