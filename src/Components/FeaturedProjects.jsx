@@ -135,7 +135,7 @@ const FeaturedWork = () => {
               <div className="lg:hidden">
                 <div className="flex min-h-0">
                   
-                  <div className="w-5/12 space-y-3 text-lg pl-4 md:pl-8 pr-2">
+                  <div className="w-5/12 space-y-3 text-lg pl-1 md:pl-8 pr-2">
                   <div className='mt-4'>
                     <h3 className='font-extrabold text-black/50'>
                       {project.projNumber}
