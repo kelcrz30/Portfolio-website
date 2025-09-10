@@ -40,7 +40,7 @@ const AboutPage = () => {
     <>
       <section className="px-10 py-20 text-center relative">
         <div className="relative z-10">
-          <p className="font-Moderniz text-4xl lg:text-8xl text-black leading-tight">
+          <p className="font-Moderniz text-4xl md:text-7xl xl:text-8xl text-black leading-tight">
             Delivering originality with a refined touch to strengthen your online presence.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6 mt-10 relative z-20">

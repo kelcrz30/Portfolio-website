@@ -7,6 +7,7 @@ import ScrollingCarousel from "./Components/ScrollingCaraosel";
 import "./index.css";
 import AboutPage from "./Components/AboutPage";
 import AboutSkillsSection from "./Components/AboutSkillsSection";
+import Footer from "./Components/Footer";
 
 function App() {
  
@@ -60,6 +61,10 @@ function App() {
           <div className="h-screen flex items-center justify-center bg-gray-100">
              <AboutPage />
           </div>
+        </section>
+
+        <section>
+          <Footer/>
         </section>
       </div>
     </div>
