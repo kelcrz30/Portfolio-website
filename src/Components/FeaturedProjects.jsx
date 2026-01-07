@@ -17,9 +17,20 @@ const FeaturedWork = () => {
       bgGradient: "",
       accentColor: "border-green-400 text-green-400"
     },
-    {
+        {
       id: 2,
        projNumber: "[02]",
+      title: "Saturnia Books",
+      image: "/Portfolio-website/images/saturnia.png",
+      technologies: ["Shopify", "Html", "Css", "Liquid"],
+      status: "Now Live",
+      liveUrl: "#",
+      bgGradient: "",
+      accentColor: "border-green-400 text-green-400"
+    },
+    {
+      id: 3,
+       projNumber: "[03]",
       title: "CineLuxe",
       image: "/Portfolio-website/images/cineluxe.png",
       technologies: ["React", "Tailwind", "Javascript"],
@@ -29,8 +40,8 @@ const FeaturedWork = () => {
       accentColor: "border-green-400 text-green-400"
     },
     {
-      id: 3,
-       projNumber: "[03]",
+      id: 4,
+       projNumber: "[04]",
       title: "E-COMMERCE",
       image: "/Portfolio-website/images/proj4.png",
       technologies: ["None"],
@@ -39,17 +50,7 @@ const FeaturedWork = () => {
       bgGradient: "",
       accentColor: "border-red-400 text-red-400"
     },
-    {
-      id: 4,
-       projNumber: "[04]",
-      title: "PHOTOBOOTH",
-      image: "/Portfolio-website/images/proj5.png",
-      technologies: ["None"],
-      status: "In development",
-      liveUrl: "#",
-      bgGradient: "",
-      accentColor: "border-red-400 text-red-400"
-    },
+
  
   ];
 

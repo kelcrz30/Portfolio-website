@@ -107,9 +107,6 @@ function Header() {
           ×
         </button>
 
-        <div className="absolute top-6 left-14 text-white text-xl font-medium">
-          Portfolio
-        </div>
 
         {/* Mobile Navigation */}
         <nav className="flex flex-col justify-center h-full px-14">

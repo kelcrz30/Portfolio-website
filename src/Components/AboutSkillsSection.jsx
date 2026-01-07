@@ -13,7 +13,8 @@ const AboutSkillsSection = () => {
     { name: 'HTML', description: 'Full-stack React with SSR & performance', color: '#000000' },
     { name: 'CSS', description: 'Type-safe JavaScript for scale', color: '#3178C6' },
     { name: 'FIGMA', description: 'Custom shaders & GPU-accelerated graphics', color: '#990000' },
-    { name: 'GIT/GITHUB', description: 'Custom shaders ', color: '#990000' }
+    { name: 'GIT/GITHUB', description: 'Custom shaders ', color: '#990000' },
+    { name: 'SHOPIFY', description: 'Ecommerce', color: '#990000' }
   ];
 
   useEffect(() => {
@@ -112,7 +113,7 @@ const AboutSkillsSection = () => {
             <div className="lg:col-span-5 relative mt-10 lg:mt-0">
               <div className="space-y-8">
                 {[
-                  { number: '5', label: 'PROJECTS', delay: '0s' },
+                  { number: '2', label: 'CLIENT', delay: '0s' },
                   { number: '∞', label: 'CREATIVE SOLUTIONS', delay: '0.4s' }
                 ].map((stat, index) => (
                   <div
