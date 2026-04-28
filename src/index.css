@@ -92,3 +92,28 @@
 html{
   overflow-x: hidden;
 }
+.white-to-black {
+  position: relative;
+  height: 220px;
+  background: white;
+  overflow: hidden;
+}
+
+/* circular fade */
+.white-to-black::after {
+  content: "";
+  position: absolute;
+  top: -120%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180%;
+  height: 180%;
+  background: radial-gradient(
+    circle at top,
+    rgba(0, 0, 0, 0.05) 0%,
+    rgba(0, 0, 0, 0.15) 30%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.75) 65%,
+    #000 80%
+  );
+}

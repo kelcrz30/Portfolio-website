@@ -1,339 +1,249 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
-const AboutSkillsSection = () => {
-  const sectionRef = useRef(null);
+/* ─── Real skills from resume ─── */
+const skillGroups = [
+  {
+    id: '01',
+    category: 'Frontend',
+    description: 'Building interactive, responsive web applications with modern JavaScript and component-based architecture.',
+    skills: ['HTML5', 'CSS3', 'JavaScript', 'React'],
+    years: '2+ yrs',
+    highlight: 'Core Stack',
+  },
+  {
+    id: '02',
+    category: 'Styling',
+    description: 'Designing clean, mobile-first interfaces that look great across all screen sizes and devices.',
+    skills: ['Tailwind CSS', 'Responsive Design', 'Figma', 'UI/UX Design'],
+    years: '2+ yrs',
+    highlight: null,
+  },
+  {
+    id: '03',
+    category: 'Database',
+    description: 'Writing structured queries and managing relational data to support dynamic, data-driven applications.',
+    skills: ['SQL', 'MySQL'],
+    years: '1+ yrs',
+    highlight: null,
+  },
+  {
+    id: '04',
+    category: 'Tools',
+    description: 'Shipping projects confidently with a reliable workflow from local dev to live deployment.',
+    skills: ['Git', 'GitHub', 'Vite', 'Vercel', 'Netlify', 'Shopify'],
+    years: '1+ yrs',
+    highlight: null,
+  },
+];
 
-  const skills = useMemo(
-    () => [
-      { name: "JAVASCRIPT", description: "Core UI logic, async flows, clean interactions, reusable functions." },
-      { name: "REACT", description: "Component systems, hooks, state patterns, scalable front-end architecture." },
-      { name: "TAILWIND", description: "Utility-first styling, responsive layouts, fast UI iteration & consistency." },
-      { name: "HTML", description: "Semantic structure, accessibility-first markup, SEO-friendly layouts." },
-      { name: "CSS", description: "Grid/Flex layouts, animations, responsive polish, UI micro-details." },
-      { name: "FIGMA", description: "UI/UX layout, design systems, clean handoff for development." },
-      { name: "GIT/GITHUB", description: "Version control workflow, branching, clean commits, collaboration." },
-      { name: "SHOPIFY", description: "Theme development, Liquid sections, storefront UX, product/collection layouts." },
-    ],
-    []
-  );
+const stats = [
+  { value: '3+',  label: 'Projects Shipped' },
+  { value: '2+',  label: 'Freelance Clients' },
+  { value: '96',  label: 'Top Achiever Score' },
+  { value: '\'25', label: 'BSCS Graduate' },
+];
 
-  const [isVisible, setIsVisible] = useState(false);
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const [spot, setSpot] = useState({ x: 50, y: 30 }); // percent
+const marqueeItems = [
+  'HTML5', 'CSS3', 'JavaScript', 'React',
+  'Tailwind CSS', 'Figma', 'Git', 'Vite',
+  'SQL', 'MySQL', 'Vercel', 'Netlify', 'Shopify', 'Responsive Design',
+];
 
-  // Intersection observer
+export default function AboutSkillSection() {
+  const rowRefs    = useRef([]);
+  const statRefs   = useRef([]);
+  const marqueeRef = useRef(null);
+  const [hovered, setHovered] = useState(null);
+
+  /* intersection reveal */
   useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-
     const obs = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold: 0.25 }
+      (entries) => entries.forEach((e) => {
+        if (e.isIntersecting) e.target.dataset.visible = 'true';
+      }),
+      { threshold: 0.12 }
     );
-
-    obs.observe(el);
+    [...rowRefs.current, ...statRefs.current].forEach((el) => el && obs.observe(el));
     return () => obs.disconnect();
   }, []);
 
-  // Cursor spotlight only within section
+  /* rAF marquee */
   useEffect(() => {
-    const el = sectionRef.current;
+    const el = marqueeRef.current;
     if (!el) return;
-
-    const onMove = (e) => {
-      const r = el.getBoundingClientRect();
-      const x = ((e.clientX - r.left) / r.width) * 100;
-      const y = ((e.clientY - r.top) / r.height) * 100;
-      setSpot({
-        x: Math.max(0, Math.min(100, x)),
-        y: Math.max(0, Math.min(100, y)),
-      });
+    let x = 0, raf;
+    const step = () => {
+      x -= 0.5;
+      const half = el.scrollWidth / 2;
+      if (Math.abs(x) >= half) x = 0;
+      el.style.transform = `translateX(${x}px)`;
+      raf = requestAnimationFrame(step);
     };
-
-    el.addEventListener("pointermove", onMove);
-    return () => el.removeEventListener("pointermove", onMove);
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
   }, []);
 
-  // Auto cycle
-  useEffect(() => {
-    if (!isVisible || paused) return;
-    const id = setInterval(() => setActive((p) => (p + 1) % skills.length), 2600);
-    return () => clearInterval(id);
-  }, [isVisible, paused, skills.length]);
-
-  const activeSkill = skills[active];
-
   return (
-    <section ref={sectionRef} className="relative min-h-screen bg-black text-white overflow-hidden">
-      {/* BACKGROUND: grid + spotlight + grain */}
-      <div className="pointer-events-none absolute inset-0">
-        {/* spotlight */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background: `radial-gradient(700px circle at ${spot.x}% ${spot.y}%, rgba(255,255,255,0.10), transparent 60%)`,
-            transition: "background 120ms linear",
-          }}
-        />
-        {/* subtle grid */}
-        <div className="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(to_right,rgba(255,255,255,0.35)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.35)_1px,transparent_1px)] [background-size:64px_64px]" />
-        {/* grain */}
-        <div className="absolute inset-0 opacity-[0.09] mix-blend-overlay grain" />
-        {/* edge fades */}
-        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black to-transparent" />
-      </div>
+    <>
+      <style>{`
+        [data-reveal] {
+          opacity: 0;
+          transform: translateY(24px);
+          transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+        [data-reveal][data-visible="true"] {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      `}</style>
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 py-14 sm:py-20">
-        {/* TOP ROW */}
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-          {/* LEFT: big title + copy */}
-          <div className="lg:col-span-7">
-            <div
-              className={[
-                "inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2",
-                "text-[11px] tracking-[0.28em] uppercase text-white/70",
-                isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
-                "transition-all duration-700",
-              ].join(" ")}
-            >
-              <span className="h-2 w-2 rounded-full bg-white/70" />
-              About / Skills
+      <section className="bg-white">
+
+        {/* ══ HEADER ══ */}
+        <div className="px-6 md:px-10 lg:px-16 pt-16 md:pt-24 pb-10 md:pb-14 border-b border-neutral-100">
+          <div className="max-w-screen-lg mx-auto flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+            <div>
+              <p className="text-[10px] tracking-[0.28em] text-neutral-400 uppercase mb-3 font-medium">
+                What I Bring
+              </p>
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-black tracking-tighter leading-none uppercase">
+                Skills
+              </h2>
             </div>
-
-            <h2
-              className={[
-                "mt-6 font-black leading-[0.9]",
-                "text-5xl sm:text-6xl md:text-7xl lg:text-8xl",
-                isVisible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0",
-                "transition-all duration-700 delay-75",
-              ].join(" ")}
-            >
-              BUILDING
-              <span className="block text-white/60">INTERFACES</span>
-              <span className="block">THAT FEEL</span>
-              <span className="block text-white/60">PREMIUM.</span>
-            </h2>
-
-            <p
-              className={[
-                "mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-white/70",
-                isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
-                "transition-all duration-700 delay-150",
-              ].join(" ")}
-            >
-              I’m Kel — a front-end developer focused on modern, responsive, user-friendly experiences.
-              I like clean layouts, strong typography, and micro-interactions that make a product feel “alive”.
+            <p className="text-sm text-neutral-500 max-w-xs leading-relaxed">
+              Frontend developer specializing in React and Tailwind CSS — focused on responsive, user-first interfaces.
             </p>
-
-            {/* quick chips */}
-            <div
-              className={[
-                "mt-8 flex flex-wrap gap-2",
-                isVisible ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0",
-                "transition-all duration-700 delay-200",
-              ].join(" ")}
-            >
-  
-            </div>
-          </div>
-
-          {/* RIGHT: mini stats (awwwards style cards) */}
-          <div className="lg:col-span-5">
-            <div className="grid gap-4 sm:gap-6">
-              {[
-                { k: "02", v: "Client Projects", note: "Freelance builds delivered" },
-                { k: "08", v: "Core Skills", note: "Focused tech stack" },
-              ].map((x, i) => (
-                <div
-                  key={x.v}
-                  className={[
-                    "rounded-2xl border border-white/15 bg-white/5 p-6",
-                    "hover:bg-white/7 transition",
-                    isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
-                    "transition-all duration-700",
-                  ].join(" ")}
-                  style={{ transitionDelay: `${180 + i * 80}ms` }}
-                >
-                  <div className="flex items-end justify-between">
-                    <div className="text-5xl font-black leading-none">{x.k}</div>
-                    <div className="text-[11px] tracking-[0.28em] uppercase text-white/55">Index</div>
-                  </div>
-                  <div className="mt-3 text-sm font-semibold text-white/85">{x.v}</div>
-                  <div className="mt-1 text-sm text-white/60">{x.note}</div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
 
-        {/* MARQUEE */}
-        <div className="mt-14 sm:mt-20 border-y border-white/10 py-4 overflow-hidden">
-          <div className="marquee">
-            <div className="marquee__track">
-              {[...skills, ...skills].map((s, idx) => (
-                <span key={`${s.name}-${idx}`} className="marquee__item">
-                  <span className="dot" /> {s.name}
+        {/* ══ MARQUEE ══ */}
+        <div className="overflow-hidden border-b border-neutral-100 py-3 bg-black select-none">
+          <div ref={marqueeRef} className="flex whitespace-nowrap will-change-transform">
+            {[...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, i) => (
+              <span key={i} className="inline-flex items-center gap-4 px-5">
+                <span className="text-[11px] tracking-[0.22em] uppercase text-neutral-300 font-medium">
+                  {item}
+                </span>
+                <span className="w-1 h-1 rounded-full bg-neutral-600 shrink-0" />
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* ══ SKILL ROWS ══ */}
+        <div className="max-w-screen-lg mx-auto px-6 md:px-10 lg:px-16 divide-y divide-neutral-100">
+          {skillGroups.map((group, i) => (
+            <div
+              key={group.id}
+              ref={(el) => (rowRefs.current[i] = el)}
+              data-reveal
+              style={{ transitionDelay: `${i * 60}ms` }}
+              className="py-9 md:py-11 grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 md:gap-10 cursor-default"
+              onMouseEnter={() => setHovered(group.id)}
+              onMouseLeave={() => setHovered(null)}
+            >
+              {/* Left */}
+              <div className="flex md:flex-col md:justify-between gap-3 md:gap-0">
+                <div>
+                  <span className="text-[10px] tracking-widest text-neutral-400 font-medium">[{group.id}]</span>
+                  <h3 className="text-base font-black text-black uppercase tracking-tight mt-0.5 leading-none">
+                    {group.category}
+                  </h3>
+                </div>
+                <div className="flex items-center gap-2 md:mt-auto">
+                  <span className="text-[10px] tracking-widest text-neutral-400 uppercase">{group.years}</span>
+                  {group.highlight && (
+                    <span className="px-2 py-0.5 text-[9px] font-bold tracking-wider uppercase bg-black text-white rounded-full">
+                      {group.highlight}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Right */}
+              <div>
+                <p className="text-sm text-neutral-500 leading-relaxed mb-5 max-w-lg">
+                  {group.description}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {group.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className={`
+                        px-3 py-1.5 text-[11px] font-semibold tracking-wide rounded-full border
+                        transition-all duration-200 cursor-default
+                        ${hovered === group.id
+                          ? 'border-black text-black bg-white'
+                          : 'border-neutral-200 text-neutral-600 bg-white'}
+                      `}
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* ══ CURRENTLY LEARNING ══ */}
+        <div className="border-t border-neutral-100 bg-neutral-50">
+          <div className="max-w-screen-lg mx-auto px-6 md:px-10 lg:px-16 py-9 md:py-11 flex flex-col sm:flex-row sm:items-center gap-5">
+            <div className="shrink-0">
+              <p className="text-[10px] tracking-[0.28em] text-neutral-400 uppercase font-medium">Currently Exploring</p>
+              <h3 className="text-base font-black text-black uppercase tracking-tight mt-0.5">Learning Now</h3>
+            </div>
+            <div className="w-px h-8 bg-neutral-200 hidden sm:block mx-4 shrink-0" />
+            <div className="flex flex-wrap gap-2">
+              {['Next.js', 'TypeScript', 'Node.js', 'Express', 'GSAP', 'Three.js'].map((item) => (
+                <span
+                  key={item}
+                  className="px-3 py-1.5 text-[11px] font-semibold tracking-wide rounded-full border border-dashed border-neutral-300 text-neutral-500 bg-white"
+                >
+                  {item}
                 </span>
               ))}
             </div>
           </div>
         </div>
 
-        {/* TECH STACK SECTION */}
-        <div className="mt-14 sm:mt-20 grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-          {/* LEFT: list */}
-          <div className="lg:col-span-6">
-            <div className="flex items-center justify-between">
-              <h3 className="text-3xl sm:text-4xl font-black">TECH STACK_</h3>
-              <div className="text-[11px] tracking-[0.28em] uppercase text-white/55">
-                {paused ? "Paused" : "Auto"}
-              </div>
-            </div>
-
-            <div
-              className="mt-6 rounded-2xl border border-white/15 bg-white/5 p-3 sm:p-4"
-              onMouseEnter={() => setPaused(true)}
-              onMouseLeave={() => setPaused(false)}
-            >
-              {skills.map((s, i) => {
-                const isActive = i === active;
-                return (
-                  <button
-                    key={s.name}
-                    type="button"
-                    onClick={() => setActive(i)}
-                    className={[
-                      "w-full group flex items-center justify-between rounded-xl px-4 py-4",
-                      "border transition",
-                      isActive
-                        ? "border-white/35 bg-white/10"
-                        : "border-white/10 bg-transparent hover:bg-white/5 hover:border-white/20",
-                    ].join(" ")}
-                  >
-                    <div className="flex items-center gap-4">
-                      <span className="font-mono text-xs text-white/55 w-10">
-                        [{String(i + 1).padStart(2, "0")}]
-                      </span>
-                      <span className="font-mono tracking-wide text-sm sm:text-base">
-                        {s.name}
-                      </span>
-                    </div>
-
-                    <span
-                      className={[
-                        "h-2 w-2 rounded-full transition",
-                        isActive ? "bg-white scale-125" : "bg-white/25 group-hover:bg-white/50",
-                      ].join(" ")}
-                    />
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* RIGHT: sticky detail */}
-          <div className="lg:col-span-6">
-            <div className="lg:sticky lg:top-20">
-              <div className="rounded-2xl border border-white/15 bg-white/5 p-6 sm:p-8 overflow-hidden relative">
-                <div className="absolute inset-0 opacity-25">
-                  <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-white/10 blur-2xl" />
-                  <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-white/10 blur-2xl" />
+        {/* ══ ACHIEVEMENTS ══ */}
+        <div className="border-t border-neutral-100 bg-white">
+          <div className="max-w-screen-lg mx-auto px-6 md:px-10 lg:px-16 py-9 md:py-11">
+            <p className="text-[10px] tracking-[0.28em] text-neutral-400 uppercase font-medium mb-6">Recognition</p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {[
+                { label: 'Best in Thesis Awardee', school: 'ICCT Colleges · Nov 2025' },
+                { label: 'Top 25 Achiever', school: 'Intermediate Programming · Grade 96.37' },
+                { label: 'Academic Achievement Award', school: 'Computer Programming 2 · Grade 92, 8th rank' },
+              ].map(({ label, school }) => (
+                <div key={label} className="border border-neutral-100 rounded-lg px-5 py-4 bg-neutral-50">
+                  <p className="text-xs font-black text-black uppercase tracking-tight leading-snug">{label}</p>
+                  <p className="text-[10px] text-neutral-400 mt-1 tracking-wide">{school}</p>
                 </div>
-
-                <div className="relative">
-                  <div className="flex items-center justify-between">
-                    <div className="text-[11px] tracking-[0.28em] uppercase text-white/55">
-                      Selected Skill
-                    </div>
-                    <div className="text-[11px] tracking-[0.28em] uppercase text-white/55">
-                      {String(active + 1).padStart(2, "0")}/{String(skills.length).padStart(2, "0")}
-                    </div>
-                  </div>
-
-                  <div className="mt-4 text-4xl sm:text-5xl font-black tracking-wide">
-                    {activeSkill?.name}
-                  </div>
-
-                  <p className="mt-3 text-sm sm:text-base leading-relaxed text-white/70 max-w-xl">
-                    {activeSkill?.description}
-                  </p>
-
-                  {/* progress */}
-                  <div className="mt-8">
-                    <div className="flex items-center justify-between text-xs text-white/55">
-                      <span>Rotation</span>
-                      <span>{paused ? "Manual" : "Auto"}</span>
-                    </div>
-                    <div className="mt-2 h-2 w-full rounded-full bg-white/10 overflow-hidden">
-                      <div
-                        className="h-full rounded-full bg-white/60 transition-all duration-500"
-                        style={{ width: `${((active + 1) / skills.length) * 100}%` }}
-                      />
-                    </div>
-                  </div>
-
-                  {/* footer note */}
-                  <div className="mt-6 flex items-center justify-between text-xs text-white/45">
-                    <span>Hover list to pause.</span>
-                    <span className="font-mono">kel / portfolio</span>
-                  </div>
-                </div>
-              </div>
-
+              ))}
             </div>
           </div>
         </div>
-      </div>
 
-      {/* CSS helpers */}
-      <style>{`
-        /* grain overlay */
-        .grain {
-          background-image:
-            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
-          background-size: 180px 180px;
-        }
+        {/* ══ STATS ══ */}
+        <div className="border-t border-neutral-100">
+          <div className="max-w-screen-lg mx-auto px-6 md:px-10 lg:px-16 py-12 md:py-16 grid grid-cols-2 md:grid-cols-4 gap-8">
+            {stats.map(({ value, label }, i) => (
+              <div
+                key={label}
+                ref={(el) => (statRefs.current[i] = el)}
+                data-reveal
+                style={{ transitionDelay: `${i * 80}ms` }}
+              >
+                <p className="text-4xl md:text-5xl font-black text-black tracking-tighter leading-none">{value}</p>
+                <p className="text-[10px] tracking-[0.22em] text-neutral-400 uppercase mt-2">{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
 
-        /* marquee */
-        .marquee { width: 100%; overflow: hidden; }
-        .marquee__track {
-          display: flex;
-          gap: 2.2rem;
-          width: max-content;
-          animation: marquee 18s linear infinite;
-          will-change: transform;
-        }
-        .marquee__item {
-          display: inline-flex;
-          align-items: center;
-          gap: .6rem;
-          font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-          font-size: 12px;
-          letter-spacing: .22em;
-          text-transform: uppercase;
-          color: rgba(255,255,255,.65);
-          white-space: nowrap;
-        }
-        .marquee__item .dot {
-          width: 6px;
-          height: 6px;
-          border-radius: 999px;
-          background: rgba(255,255,255,.6);
-        }
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .marquee__track { animation: none; }
-          * { transition: none !important; }
-        }
-      `}</style>
-    </section>
+      </section>
+    </>
   );
-};
-
-export default AboutSkillsSection;
+}

@@ -17,6 +17,7 @@ const AboutPage = () => {
 
   return (
     <>
+    
       <section className="px-10 py-20 text-center relative">
         <div className="relative z-10">
           <p className="font-Moderniz text-4xl md:text-7xl xl:text-8xl text-black leading-tight">
