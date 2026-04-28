@@ -37,7 +37,7 @@ const skillGroups = [
 ];
 
 const stats = [
-  { value: '3+',  label: 'Projects Shipped' },
+  { value: '15+',  label: 'Projects Shipped' },
   { value: '2+',  label: 'Freelance Clients' },
   { value: '96',  label: 'Top Achiever Score' },
   { value: '\'25', label: 'BSCS Graduate' },
